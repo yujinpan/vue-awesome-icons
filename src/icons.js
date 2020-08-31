@@ -15,7 +15,9 @@ import { getAllModules } from './import-all';
 Vue.component('svg-icon', SvgIcon);
 
 // 获取所有的图标
-const modules = getAllModules(require.context('../node_modules/vue-awesome/icons/', true, /\.js$/));
+const modules = getAllModules(
+  require.context('../node_modules/vue-awesome/icons/', true, /\.js$/)
+);
 delete modules.index;
 
 // 存放图标的分类数据
@@ -24,9 +26,12 @@ const icons = {
   // else
 };
 let group;
-Object.keys(modules).forEach(icon => {
+Object.keys(modules).forEach((icon) => {
   group = icon.includes('/') ? icon.split('/')[0] : 'common';
   (icons[group] = icons[group] || []).push(icon);
 });
 
-export default Object.entries(icons).map(item => ({name: item[0], icons: item[1]}));
+export default Object.entries(icons).map((item) => ({
+  name: item[0],
+  icons: item[1]
+}));
