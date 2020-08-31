@@ -10,14 +10,41 @@
         :href="`#${item.name}`"
         >{{ item.name }}</a
       >
+
+      Download SVG?
+      <label>
+        <input
+          @change="onDownloadChange"
+          :checked="isDownload"
+          name="download"
+          type="radio"
+          value="yes"
+        />
+        yes
+      </label>
+      <label>
+        <input
+          @change="onDownloadChange"
+          :checked="!isDownload"
+          name="download"
+          type="radio"
+          value="no"
+        />
+        no
+      </label>
     </div>
 
     <div v-for="item in iconGroup" :key="item.group">
       <h2>
         <a :name="item.name" :href="`#${item.name}`">{{ item.name }}</a>
       </h2>
-      <ul>
-        <li class="copy-btn" v-for="icon in item.icons" :key="icon">
+      <ul @click.capture="onDownloadSVG" class="icon-list">
+        <li
+          class="copy-btn"
+          v-for="icon in item.icons"
+          :key="icon"
+          :data-icon="icon"
+        >
           <svg-icon class="icon" :name="icon"></svg-icon>
           <input type="text" readonly :value="icon" />
         </li>
@@ -30,21 +57,35 @@
 </template>
 
 <script>
-import ClipboardJS from "clipboard";
+import ClipboardJS from 'clipboard';
 
-import iconGroup from "@/icons";
+import iconGroup from '@/icons';
+import { closest, createSVG, downloadSVG } from '@/utils';
 
 export default {
-  name: "app",
+  name: 'app',
   data() {
     return {
-      copyText: "",
+      isDownload: +localStorage.getItem('IS_DOWNLOAD') || 0,
+      copyText: '',
       copyStateTimeout: 0,
       copyState: false,
       iconGroup
     };
   },
   methods: {
+    onDownloadSVG(e) {
+      if (this.isDownload) {
+        const elem = closest(e.target, 'copy-btn', 'icon-list');
+        if (elem) {
+          downloadSVG(createSVG(elem.querySelector('svg')), elem.dataset.icon);
+        }
+      }
+    },
+    onDownloadChange(e) {
+      this.isDownload = (e.target.value === 'yes') === e.target.checked ? 1 : 0;
+      localStorage.setItem('IS_DOWNLOAD', this.isDownload + '');
+    },
     copySuccess(e) {
       this.copyText = e.text;
       if (this.copyStateTimeout) {
@@ -55,11 +96,11 @@ export default {
     }
   },
   mounted() {
-    new ClipboardJS(".copy-btn", {
+    new ClipboardJS('.copy-btn', {
       target: function(trigger) {
-        return trigger.querySelector("input");
+        return trigger.querySelector('input');
       }
-    }).on("success", this.copySuccess);
+    }).on('success', this.copySuccess);
   }
 };
 </script>
