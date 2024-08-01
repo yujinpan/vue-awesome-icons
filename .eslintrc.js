@@ -6,10 +6,14 @@ module.exports = {
   root: true,
 
   env: {
-    node: true
+    node: true,
   },
 
-  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
+  extends: [
+    'plugin:vue/essential',
+    'eslint:recommended',
+    '@vue/eslint-config-prettier',
+  ],
 
   rules: {
     'prettier/prettier': [
@@ -18,15 +22,11 @@ module.exports = {
       {
         singleQuote: true,
         arrowParens: 'always',
-        semi: true
-      }
+        semi: true,
+      },
     ],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-    eqeqeq: ['error', 'always']
+    eqeqeq: ['error', 'always'],
   },
-
-  parserOptions: {
-    parser: 'babel-eslint'
-  }
 };

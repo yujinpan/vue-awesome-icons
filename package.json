@@ -3,28 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run serve",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "publish:beta": "release-ops beta --publish=false",
+    "publish:minor": "release-ops minor --publish=false",
+    "publish:patch": "release-ops patch --publish=false",
+    "start": "npm run dev",
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "clipboard": "^2.0.4",
-    "core-js": "^3.4.4",
-    "vue": "^2.6.10",
-    "vue-awesome": "^4.0.2"
+    "clipboard": "^2.x",
+    "core-js": "^3.x",
+    "vue": "^2.x",
+    "vue-awesome": "^4.x"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.1.0",
-    "@vue/cli-plugin-eslint": "^4.1.0",
-    "@vue/cli-service": "^4.1.0",
-    "@vue/eslint-config-prettier": "^4.0.1",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.13.1",
-    "sass-loader": "^8.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "@types/node": "*",
+    "@vitejs/plugin-vue2": "^2",
+    "@vitejs/plugin-vue2-jsx": "^1.1.1",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "eslint": "8.22.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "prettier": "^3",
+    "release-ops": "^1.0.1",
+    "sass": "^1.77.8",
+    "vite": "^5",
+    "vite-plugin-ga": "^1.0.2"
   },
   "browserslist": [
     "> 1%",

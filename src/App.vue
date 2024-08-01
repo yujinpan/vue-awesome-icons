@@ -70,7 +70,7 @@ export default {
       copyText: '',
       copyStateTimeout: 0,
       copyState: false,
-      iconGroup
+      iconGroup,
     };
   },
   methods: {
@@ -93,15 +93,15 @@ export default {
       }
       this.copyState = true;
       this.copyStateTimeout = setTimeout(() => (this.copyState = false), 3000);
-    }
+    },
   },
   mounted() {
     new ClipboardJS('.copy-btn', {
-      target: function(trigger) {
+      target: function (trigger) {
         return trigger.querySelector('input');
-      }
+      },
     }).on('success', this.copySuccess);
-  }
+  },
 };
 </script>
 
