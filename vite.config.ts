@@ -6,6 +6,7 @@ import vitePluginGA from 'vite-plugin-ga';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/vue-awesome-icons/',
   plugins: [
     vue(),
     vueJsx(),
