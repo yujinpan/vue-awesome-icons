@@ -14,7 +14,7 @@
   "dependencies": {
     "clipboard": "^2.x",
     "core-js": "^3.x",
-    "vue": "^2.x",
+    "vue": "^3.x",
     "vue-awesome": "^4.x"
   },
   "devDependencies": {
